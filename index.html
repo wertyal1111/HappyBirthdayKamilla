@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С Днём Рождения, Камилла! 🎂</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Comfortaa:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comfortaa', cursive;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #fff;
+        }
+
+        /* ===== КОНФЕТТИ ===== */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .confetti {
+            position: absolute;
+            top: -10px;
+            width: 10px;
+            height: 10px;
+            opacity: 0.8;
+            animation: confetti-fall linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-10px) rotateZ(0deg) rotateX(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotateZ(720deg) rotateX(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* ===== ЗВЁЗДЫ ===== */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: twinkle ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* ===== ШАРИКИ ===== */
+        .balloons {
+            position: fixed;
+            bottom: -150px;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .balloon {
+            position: absolute;
+            bottom: -150px;
+            width: 40px;
+            height: 50px;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            animation: float-up linear infinite;
+            opacity: 0.7;
+        }
+
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 30px;
+            background: rgba(255,255,255,0.5);
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-120vh) rotate(15deg);
+                opacity: 0;
+            }
+        }
+
+        /* ===== ФЕЙЕРВЕРКИ ===== */
+        .firework {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .firework-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            animation: firework-explode 1.5s ease-out forwards;
+        }
+
+        @keyframes firework-explode {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* ===== HERO СЕКЦИЯ ===== */
+        .hero {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .crown {
+            font-size: 80px;
+            animation: bounce 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            background: linear-gradient(45deg, #ff6b9d, #ffa8cc, #ffd700, #ff6b9d);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease infinite, title-appear 1.5s ease-out;
+            margin: 20px 0;
+            text-shadow: none;
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes title-appear {
+            0% { transform: scale(0) rotate(-10deg); opacity: 0; }
+            50% { transform: scale(1.2) rotate(3deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .hero h2 {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(3rem, 10vw, 7rem);
+            color: #ffd700;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5), 0 0 60px rgba(255, 215, 0, 0.3);
+            animation: glow-pulse 2s ease-in-out infinite, name-appear 2s ease-out 0.5s both;
+            margin-bottom: 20px;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        @keyframes name-appear {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: #ffa8cc;
+            animation: fadeIn 2s ease-out 1s both;
+            letter-spacing: 2px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .cake-emoji {
+            font-size: 100px;
+            margin: 30px 0;
+            animation: cake-appear 1s ease-out 1.5s both, float 3s ease-in-out infinite 2.5s;
+            filter: drop-shadow(0 0 20px rgba(255, 165, 0, 0.5));
+        }
+
+        @keyframes cake-appear {
+            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            animation: fadeIn 2s ease-out 3s both;
+        }
+
+        .scroll-arrow {
+            font-size: 30px;
+            animation: scroll-bounce 2s ease-in-out infinite;
+            color: #ffa8cc;
+        }
+
+        @keyframes scroll-bounce {
+            0%, 100% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(10px); opacity: 1; }
+        }
+
+        /* ===== СЕКЦИИ ===== */
+        .section {
+            position: relative;
+            z-index: 10;
+            padding: 80px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            text-align: center;
+            margin-bottom: 50px;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        /* ===== ФОТО ГАЛЕРЕЯ ===== */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .gallery-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: card-appear 0.8s ease-out forwards;
+        }
+
+        .gallery-card:nth-child(1) { animation-delay: 0.2s; }
+        .gallery-card:nth-child(2) { animation-delay: 0.4s; }
+        .gallery-card:nth-child(3) { animation-delay: 0.6s; }
+        .gallery-card:nth-child(4) { animation-delay: 0.8s; }
+        .gallery-card:nth-child(5) { animation-delay: 1.0s; }
+        .gallery-card:nth-child(6) { animation-delay: 1.2s; }
+
+        @keyframes card-appear {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 20px 60px rgba(255, 107, 157, 0.4);
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-card .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            text-align: center;
+        }
+
+        .gallery-card .card-overlay p {
+            font-size: 1rem;
+            color: #ffa8cc;
+        }
+
+        /* ===== ПОЗДРАВЛЕНИЕ ===== */
+        .greeting-box {
+            background: linear-gradient(135deg, rgba(255,107,157,0.15), rgba(255,168,204,0.1));
+            border: 2px solid rgba(255,107,157,0.3);
+            border-radius: 30px;
+            padding: 50px 40px;
+            margin: 40px auto;
+            max-width: 800px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .greeting-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255,215,0,0.1), transparent, rgba(255,107,157,0.1), transparent);
+            animation: rotate-bg 10s linear infinite;
+        }
+
+        @keyframes rotate-bg {
+            to { transform: rotate(360deg); }
+        }
+
+        .greeting-box > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .greeting-box .hearts {
+            font-size: 40px;
+            margin-bottom: 20px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.15); }
+        }
+
+        .greeting-box p {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            line-height: 2;
+            color: #e8d5e0;
+            margin-bottom: 15px;
+        }
+
+        .greeting-box .signature {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.5rem;
+            color: #ffd700;
+            margin-top: 30px;
+        }
+
+        /* ===== КАЧЕСТВА ===== */
+        .qualities {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .quality-badge {
+            background: linear-gradient(135deg, rgba(255,107,157,0.2), rgba(255,215,0,0.2));
+            border: 1px solid rgba(255,215,0,0.3);
+            border-radius: 50px;
+            padding: 12px 25px;
+            font-size: 1rem;
+            color: #ffd700;
+            transition: all 0.3s ease;
+            cursor: default;
+            animation: badge-pop 0.5s ease-out both;
+        }
+
+        .quality-badge:nth-child(1) { animation-delay: 0.1s; }
+        .quality-badge:nth-child(2) { animation-delay: 0.2s; }
+        .quality-badge:nth-child(3) { animation-delay: 0.3s; }
+        .quality-badge:nth-child(4) { animation-delay: 0.4s; }
+        .quality-badge:nth-child(5) { animation-delay: 0.5s; }
+        .quality-badge:nth-child(6) { animation-delay: 0.6s; }
+        .quality-badge:nth-child(7) { animation-delay: 0.7s; }
+        .quality-badge:nth-child(8) { animation-delay: 0.8s; }
+
+        @keyframes badge-pop {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .quality-badge:hover {
+            background: linear-gradient(135deg, rgba(255,107,157,0.5), rgba(255,215,0,0.5));
+            transform: scale(1.1) !important;
+            box-shadow: 0 5px 20px rgba(255,215,0,0.3);
+        }
+
+        /* ===== ПОЖЕЛАНИЯ ===== */
+        .wishes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .wish-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.1));
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px) rotate(-2deg);
+            animation: wish-appear 0.6s ease-out forwards;
+        }
+
+        .wish-card:nth-child(1) { animation-delay: 0.2s; }
+        .wish-card:nth-child(2) { animation-delay: 0.4s; }
+        .wish-card:nth-child(3) { animation-delay: 0.6s; }
+        .wish-card:nth-child(4) { animation-delay: 0.8s; }
+        .wish-card:nth-child(5) { animation-delay: 1.0s; }
+        .wish-card:nth-child(6) { animation-delay: 1.2s; }
+
+        @keyframes wish-appear {
+            to { opacity: 1; transform: translateY(0) rotate(0deg); }
+        }
+
+        .wish-card:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255,107,157,0.3);
+            border-color: rgba(255,107,157,0.5);
+        }
+
+        .wish-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .wish-card h3 {
+            color: #ffd700;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .wish-card p {
+            color: #c8b8d0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* ===== СТИХ ===== */
+        .poem-section {
+            background: linear-gradient(135deg, rgba(255,215,0,0.05), rgba(255,107,157,0.05));
+            border-radius: 30px;
+            padding: 50px 30px;
+            margin: 60px auto;
+            max-width: 700px;
+            text-align: center;
+            border: 1px solid rgba(255,215,0,0.2);
+        }
+
+        .poem-section .poem-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .poem-text {
+            font-style: italic;
+            font-size: clamp(1rem, 2vw, 1.15rem);
+            line-height: 2.2;
+            color: #e0d0e8;
+        }
+
+        .poem-text .line {
+            opacity: 0;
+            animation: line-appear 0.8s ease-out forwards;
+        }
+
+        .poem-text .line:nth-child(1) { animation-delay: 0.3s; }
+        .poem-text .line:nth-child(2) { animation-delay: 0.6s; }
+        .poem-text .line:nth-child(3) { animation-delay: 0.9s; }
+        .poem-text .line:nth-child(4) { animation-delay: 1.2s; }
+        .poem-text .line:nth-child(5) { animation-delay: 1.5s; }
+        .poem-text .line:nth-child(6) { animation-delay: 1.8s; }
+        .poem-text .line:nth-child(7) { animation-delay: 2.1s; }
+        .poem-text .line:nth-child(8) { animation-delay: 2.4s; }
+
+        @keyframes line-appear {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* ===== КНОПКА СЮРПРИЗ ===== */
+        .surprise-section {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .surprise-btn {
+            font-family: 'Comfortaa', cursive;
+            font-size: 1.3rem;
+            font-weight: 700;
+            padding: 20px 50px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(45deg, #ff6b9d, #ffd700, #ff6b9d);
+            background-size: 200% auto;
+            color: #1a1a2e;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(255,107,157,0.4);
+            animation: gradient-shift 3s ease infinite, pulse-shadow 2s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes pulse-shadow {
+            0%, 100% { box-shadow: 0 10px 40px rgba(255,107,157,0.4); }
+            50% { box-shadow: 0 10px 60px rgba(255,107,157,0.7), 0 0 100px rgba(255,215,0,0.3); }
+        }
+
+        .surprise-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .surprise-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* ===== МУЗЫКАЛЬНЫЕ НОТЫ ===== */
+        .music-note {
+            position: fixed;
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 999;
+            animation: music-float 3s ease-out forwards;
+        }
+
+        @keyframes music-float {
+            0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+            100% { transform: translate(var(--mx), -200px) rotate(var(--mr)); opacity: 0; }
+        }
+
+        /* ===== ЛЕНТА ФОТО ===== */
+        .photo-strip {
+            display: flex;
+            gap: 0;
+            overflow: hidden;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .photo-strip-inner {
+            display: flex;
+            gap: 5px;
+            animation: scroll-photos 30s linear infinite;
+        }
+
+        .photo-strip-inner img {
+            height: 150px;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        @keyframes scroll-photos {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ===== СЧЁТЧИК ===== */
+        .counter-section {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .counter-text {
+            font-size: 1.2rem;
+            color: #ffa8cc;
+            margin-bottom: 20px;
+        }
+
+        .counter-value {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(2rem, 6vw, 4rem);
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255,215,0,0.5);
+        }
+
+        /* ===== TWIN CONNECTION ===== */
+        .twin-section {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .twin-hearts {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .twin-heart {
+            font-size: 60px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        .twin-heart:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .twin-connector {
+            font-size: 30px;
+            color: #ffd700;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .twin-text {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: #e0d0e8;
+            line-height: 2;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer .big-heart {
+            font-size: 80px;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .footer p {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: #ffa8cc;
+        }
+
+        .footer .year {
+            font-family: 'Comfortaa', cursive;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.3);
+            margin-top: 20px;
+        }
+
+        /* ===== ПЛАВАЮЩИЕ СЕРДЕЧКИ ===== */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float-heart linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes float-heart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* ===== МОДАЛЬНОЕ ОКНО СЮРПРИЗ ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e, #2a1a3e);
+            border-radius: 30px;
+            padding: 50px 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            border: 2px solid rgba(255,215,0,0.3);
+            animation: modal-pop 0.5s ease-out;
+            position: relative;
+        }
+
+        @keyframes modal-pop {
+            0% { transform: scale(0) rotate(-10deg); }
+            50% { transform: scale(1.05) rotate(2deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 30px;
+            color: #ffa8cc;
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: transform 0.3s;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-emoji {
+            font-size: 80px;
+            display: block;
+            margin-bottom: 20px;
+            animation: bounce 1s ease-in-out infinite;
+        }
+
+        .modal-content h2 {
+            font-family: 'Pacifico', cursive;
+            color: #ffd700;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .modal-content p {
+            color: #e0d0e8;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* ===== SPARKLE CURSOR ===== */
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 12px;
+            animation: sparkle-fade 1s ease-out forwards;
+        }
+
+        @keyframes sparkle-fade {
+            0% { transform: scale(1) rotate(0deg); opacity: 1; }
+            100% { transform: scale(0) rotate(180deg) translateY(-30px); opacity: 0; }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .greeting-box {
+                padding: 30px 20px;
+            }
+
+            .gallery-card img {
+                height: 200px;
+            }
+
+            .wish-card {
+                padding: 20px;
+            }
+
+            .surprise-btn {
+                padding: 15px 35px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Звёзды -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Плавающие сердечки -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- Шарики -->
+    <div class="balloons" id="balloons"></div>
+
+    <!-- Конфетти -->
+    <div class="confetti-container" id="confetti"></div>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="crown">👑</div>
+        <h1>С Днём Рождения!</h1>
+        <h2>Камилла</h2>
+        <p class="subtitle">✨ Моя любимая двоюродная сестра ✨</p>
+        <div class="cake-emoji">🎂</div>
+        <div class="scroll-hint">
+            <p style="color: #ffa8cc; font-size: 0.9rem; margin-bottom: 5px;">Листай вниз</p>
+            <div class="scroll-arrow">⬇️</div>
+        </div>
+    </section>
+
+    <!-- ===== TWIN CONNECTION ===== -->
+    <section class="section twin-section">
+        <div class="section-title">💕 Родная душа 💕</div>
+        <div class="twin-hearts">
+            <span class="twin-heart">💖</span>
+            <span class="twin-connector">∞</span>
+            <span class="twin-heart">💖</span>
+        </div>
+        <p class="twin-text">
+            Ты не просто сестра — ты мой самый близкий человек,
+            родственная душа и лучшая подруга на свете!
+            Сегодня твой особенный день, и я хочу, чтобы ты знала,
+            как сильно я тебя люблю и ценю! 🌟
+        </p>
+    </section>
+
+    <!-- ===== ГАЛЕРЕЯ ===== -->
+    <section class="section">
+        <div class="section-title">🌸 Для тебя 🌸</div>
+        <div class="gallery">
+            <div class="gallery-card">
+                <img src="data:image/jpeg;base64,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" alt="Цветы">
+                <div class="card-overlay">
+                    <p>🌺 Ты прекрасна как цветок</p>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&h=300&fit=crop" alt="Праздник">
+                <div class="card-overlay">
+                    <p>🎉 Пусть жизнь будет праздником!</p>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <img src="https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?w=400&h=300&fit=crop" alt="Звёзды">
+                <div class="card-overlay">
+                    <p>⭐ Ты сияешь ярче звёзд</p>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <img src="https://images.unsplash.com/photo-1558636508-e0db3814bd1d?w=400&h=300&fit=crop" alt="Торт">
+                <div class="card-overlay">
+                    <p>🎂 Сладкой жизни тебе!</p>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <img src="https://images.unsplash.com/photo-1455659817273-f96807779a8a?w=400&h=300&fit=crop" alt="Закат">
+                <div class="card-overlay">
+                    <p>🌅 Пусть каждый день будет красивым</p>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400&h=300&fit=crop" alt="Подарки">
+                <div class="card-overlay">
+                    <p>🎁 Ты — лучший подарок судьбы</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ПОЗДРАВЛЕНИЕ ===== -->
+    <section class="section">
+        <div class="section-title">💌 Поздравление 💌</div>
+        <div class="greeting-box">
+            <div class="hearts">💝💖💝</div>
+            <p>
+                Дорогая моя Камилла! 🌹
+            </p>
+            <p>
+                В этот замечательный день я хочу пожелать тебе
+                всего самого прекрасного, что только есть на свете!
+            </p>
+            <p>
+                Ты — невероятный человек с огромным сердцем,
+                светлой душой и потрясающей улыбкой, которая
+                освещает всё вокруг! ☀️
+            </p>
+            <p>
+                Пусть каждый день приносит тебе счастье,
+                любовь, удачу и исполнение всех мечтаний!
+                Ты заслуживаешь самого лучшего! 🌈
+            </p>
+            <p>
+                Я горжусь тем, что ты моя сестра,
+                и благодарю судьбу за тебя каждый день! 🙏
+            </p>
+            <div class="signature">
+                С любовью, твой брат 💕
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== КАЧЕСТВА ===== -->
+    <section class="section">
+        <div class="section-title">✨ Какая ты ✨</div>
+        <div class="qualities">
+            <span class="quality-badge">🌟 Красивая</span>
+            <span class="quality-badge">💪 Сильная</span>
+            <span class="quality-badge">🧠 Умная</span>
+            <span class="quality-badge">😊 Добрая</span>
+            <span class="quality-badge">🎯 Целеустремлённая</span>
+            <span class="quality-badge">✨ Уникальная</span>
+            <span class="quality-badge">💖 Любимая</span>
+            <span class="quality-badge">🦋 Нежная</span>
+        </div>
+    </section>
+
+    
+
+    <!-- ===== ПОЖЕЛАНИЯ ===== -->
+    <section class="section">
+        <div class="section-title">🎁 Мои пожелания 🎁</div>
+        <div class="wishes-grid">
+            <div class="wish-card">
+                <span class="wish-icon">❤️</span>
+                <h3>Любви</h3>
+                <p>Пусть твоё сердце всегда будет наполнено любовью и теплом близких людей</p>
+            </div>
+            <div class="wish-card">
+                <span class="wish-icon">💰</span>
+                <h3>Богатства</h3>
+                <p>Пусть финансовое благополучие сопровождает тебя на каждом шагу</p>
+            </div>
+            <div class="wish-card">
+                <span class="wish-icon">🌍</span>
+                <h3>Путешествий</h3>
+                <p>Пусть весь мир будет открыт для тебя, и ты увидишь самые красивые места</p>
+            </div>
+            <div class="wish-card">
+                <span class="wish-icon">💪</span>
+                <h3>Здоровья</h3>
+                <p>Крепкого здоровья тебе и твоим близким на долгие-долгие годы!</p>
+            </div>
+            <div class="wish-card">
+                <span class="wish-icon">🎯</span>
+                <h3>Успехов</h3>
+                <p>Пусть все цели достигаются, а мечты превращаются в реальность!</p>
+            </div>
+            <div class="wish-card">
+                <span class="wish-icon">😄</span>
+                <h3>Счастья</h3>
+                <p>Бесконечного счастья, улыбок и только положительных эмоций каждый день!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== СЮРПРИЗ ===== -->
+    <section class="surprise-section">
+        <p style="color: #ffa8cc; margin-bottom: 20px; font-size: 1.1rem;">У меня есть кое-что для тебя... 🤫</p>
+        <button class="surprise-btn" onclick="showSurprise()">
+            🎁 Нажми для сюрприза! 🎁
+        </button>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <span class="big-heart">💝</span>
+        <p>Камилла, ты — лучшая! 🌟</p>
+        <p style="font-size: clamp(1rem, 2vw, 1.3rem); margin-top: 10px; color: #c8b8d0;">
+            Пусть этот год будет самым счастливым!
+        </p>
+        <p class="year">Сделано с любовью 💕 </p>
+    </footer>
+
+    <!-- ===== МОДАЛЬНОЕ ОКНО ===== -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeSurprise()">✖</button>
+            <span class="modal-emoji">🥳</span>
+            <h2>Сюрприз!</h2>
+            <p>
+                Камилла, ты лошара! 💖
+            </p>
+            <p style="margin-top: 10px;">
+                Обещаю быть рядом всегда, поддерживать тебя
+                и дарить улыбки каждый день! 🤗
+            </p>
+            <p style="margin-top: 15px; font-size: 1.3rem;">
+                🎂🎈🎁🌟💕🦋✨🌈
+            </p>
+            <p style="margin-top: 15px; color: #ffd700; font-family: 'Pacifico', cursive; font-size: 1.5rem;">
+                Люблю тебя Лошара! 💕
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // ===== ЗВЁЗДЫ =====
+        function createStars() {
+            const container = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                const size = Math.random() * 3 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                star.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(star);
+            }
+        }
+
+        // ===== КОНФЕТТИ =====
+        function createConfetti() {
+            const container = document.getElementById('confetti');
+            const colors = ['#ff6b9d', '#ffd700', '#ff4757', '#2ed573', '#1e90ff', '#ffa502', '#ff6b81', '#a55eea', '#ff9ff3'];
+
+            setInterval(() => {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                const shape = Math.random();
+                if (shape > 0.5) {
+                    confetti.style.borderRadius = '50%';
+                } else {
+                    confetti.style.borderRadius = '0';
+                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                }
+                confetti.style.width = (Math.random() * 8 + 5) + 'px';
+                confetti.style.height = (Math.random() * 8 + 5) + 'px';
+                container.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 6000);
+            }, 200);
+        }
+// ===== ШАРИКИ =====
+        function createBalloons() {
+            const container = document.getElementById('balloons');
+            const colors = ['#ff6b9d', '#ffd700', '#ff4757', '#2ed573', '#1e90ff', '#ffa502', '#a55eea', '#ff9ff3'];
+
+            setInterval(() => {
+                const balloon = document.createElement('div');
+                balloon.classList.add('balloon');
+                balloon.style.left = Math.random() * 100 + '%';
+                balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                balloon.style.animationDuration = (Math.random() * 8 + 8) + 's';
+                const size = Math.random() * 20 + 30;
+                balloon.style.width = size + 'px';
+                balloon.style.height = (size * 1.2) + 'px';
+                container.appendChild(balloon);
+                setTimeout(() => balloon.remove(), 16000);
+            }, 2000);
+        }
+
+        // ===== ПЛАВАЮЩИЕ СЕРДЕЧКИ =====
+        function createFloatingHearts() {
+            const container = document.getElementById('floatingHearts');
+            const hearts = ['💕', '💖', '💗', '💝', '💘', '❤️', '🩷', '🤍'];
+
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.fontSize = (Math.random() * 15 + 12) + 'px';
+                heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(heart);
+                setTimeout(() => heart.remove(), 20000);
+            }, 3000);
+        }
+
+        // ===== ФЕЙЕРВЕРКИ =====
+        function createFirework(x, y) {
+            const colors = ['#ff6b9d', '#ffd700', '#ff4757', '#2ed573', '#1e90ff', '#ffa502', '#a55eea'];
+            const container = document.createElement('div');
+            container.classList.add('firework');
+            container.style.left = x + 'px';
+            container.style.top = y + 'px';
+            document.body.appendChild(container);
+
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('firework-particle');
+                const angle = (i / 30) * Math.PI * 2;
+                const velocity = 50 + Math.random() * 80;
+                particle.style.setProperty('--tx', Math.cos(angle) * velocity + 'px');
+                particle.style.setProperty('--ty', Math.sin(angle) * velocity + 'px');
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                container.appendChild(particle);
+            }
+
+            setTimeout(() => container.remove(), 1500);
+        }
+
+        // Фейерверки по клику
+        document.addEventListener('click', (e) => {
+            createFirework(e.clientX, e.clientY);
+        });
+
+        // Автоматические фейерверки
+        setInterval(() => {
+            createFirework(
+                Math.random() * window.innerWidth,
+                Math.random() * window.innerHeight * 0.5
+            );
+        }, 4000);
+
+        // ===== SPARKLE CURSOR =====
+        let sparkleTimer = 0;
+        document.addEventListener('mousemove', (e) => {
+            sparkleTimer++;
+            if (sparkleTimer % 3 !== 0) return;
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            sparkle.style.left = e.clientX + 'px';
+            sparkle.style.top = e.clientY + 'px';
+            sparkle.textContent = ['✨', '⭐', '💫', '🌟'][Math.floor(Math.random() * 4)];
+            document.body.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 1000);
+        });
+
+        // ===== СЮРПРИЗ =====
+        function showSurprise() {
+            document.getElementById('modal').classList.add('active');
+            // Массированное конфетти
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    createFirework(
+                        Math.random() * window.innerWidth,
+                        Math.random() * window.innerHeight
+                    );
+                }, i * 200);
+            }
+        }
+
+        function closeSurprise() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        // Закрытие по клику на оверлей
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('modal')) {
+                closeSurprise();
+            }
+        });
+
+        // ===== МУЗЫКАЛЬНЫЕ НОТЫ ПРИ СКРОЛЛЕ =====
+        let lastScrollY = 0;
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+            if (Math.abs(currentScrollY - lastScrollY) > 100) {
+                const note = document.createElement('div');
+                note.classList.add('music-note');
+                note.textContent = ['🎵', '🎶', '🎼', '🎤'][Math.floor(Math.random() * 4)];
+                note.style.left = Math.random() * 100 + '%';
+                note.style.top = (currentScrollY + Math.random() * window.innerHeight) + 'px';
+                note.style.setProperty('--mx', (Math.random() * 100 - 50) + 'px');
+                note.style.setProperty('--mr', (Math.random() * 360) + 'deg');
+                document.body.appendChild(note);
+                setTimeout(() => note.remove(), 3000);
+                lastScrollY = currentScrollY;
+            }
+        });
+
+        // ===== ИНИЦИАЛИЗАЦИЯ =====
+        createStars();
+        createConfetti();
+        createBalloons();
+        createFloatingHearts();
+
+        // Приветственные фейерверки
+        setTimeout(() => createFirework(window.innerWidth * 0.3, window.innerHeight * 0.3), 1000);
+        setTimeout(() => createFirework(window.innerWidth * 0.7, window.innerHeight * 0.2), 1500);
+        setTimeout(() => createFirework(window.innerWidth * 0.5, window.innerHeight * 0.4), 2000);
+
+        console.log('🎂 С Днём Рождения, Камилла! 🎂');
+    </script>
+</body>
+</html>
+                
